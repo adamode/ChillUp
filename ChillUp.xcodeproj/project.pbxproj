@@ -13,6 +13,7 @@
 		81DB94511F1C73870021B825 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81DB944F1F1C73870021B825 /* Main.storyboard */; };
 		81DB94531F1C73870021B825 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81DB94521F1C73870021B825 /* Assets.xcassets */; };
 		81DB94561F1C73870021B825 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81DB94541F1C73870021B825 /* LaunchScreen.storyboard */; };
+		81FF957B1F1C766500E0EE83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81FF957A1F1C766500E0EE83 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		81DB94521F1C73870021B825 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		81DB94551F1C73870021B825 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81DB94571F1C73870021B825 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81FF957A1F1C766500E0EE83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BD7B89CC367C8820D0A89688 /* Pods-ChillUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChillUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChillUp/Pods-ChillUp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +76,7 @@
 				81DB944F1F1C73870021B825 /* Main.storyboard */,
 				81DB94521F1C73870021B825 /* Assets.xcassets */,
 				81DB94541F1C73870021B825 /* LaunchScreen.storyboard */,
+				81FF957A1F1C766500E0EE83 /* GoogleService-Info.plist */,
 				81DB94571F1C73870021B825 /* Info.plist */,
 			);
 			path = ChillUp;
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81DB94561F1C73870021B825 /* LaunchScreen.storyboard in Resources */,
+				81FF957B1F1C766500E0EE83 /* GoogleService-Info.plist in Resources */,
 				81DB94531F1C73870021B825 /* Assets.xcassets in Resources */,
 				81DB94511F1C73870021B825 /* Main.storyboard in Resources */,
 			);
@@ -381,6 +385,7 @@
 				81DB945C1F1C73870021B825 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
