@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,8 +20,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         FirebaseApp.configure()
         
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        handleUser(Auth.auth().currentUser)
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            self.handleUser(user)
+        }
+        
         return true
     }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        let handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        
+        return handled
+    }
+    
+    func handleUser(_ user : User?){
+        if user != nil {
+            self.displayMainScreen()
+            return;
+        } else {
+            self.displayLoginScreen()
+        }
+    }
+    
+    func displayLoginScreen(){
+        let authStoryboard = UIStoryboard(name: "Auth", bundle: Bundle.main)
+        let loginViewController = authStoryboard.instantiateViewController(withIdentifier: "UINavigationController")
+        window?.rootViewController = loginViewController
+        window?.makeKeyAndVisible()
+    }
+    
+    func displayMainScreen(){
+        
+        let authStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let mainVC = authStoryboard.instantiateViewController(withIdentifier: "TabBarNavi")
+        let navController = UINavigationController()
+        navController.pushViewController(mainVC, animated: true)
+        
+        window?.rootViewController = navController
+        window?.makeKeyAndVisible()
+    }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
