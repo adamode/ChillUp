@@ -10,12 +10,47 @@ import UIKit
 import MapKit
 import Firebase
 
-class CreateVC: UIViewController {
+class CreateVC: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var chillUpName: UITextField!
-    @IBOutlet weak var chillUpDescription: UITextField!
-    @IBOutlet weak var chillUpDateandTime: UITextField!
-    @IBOutlet weak var chillUpCategory: UITextField!
+    @IBOutlet weak var chillUpName: UITextField! {
+        
+        didSet {
+            
+            chillUpName.delegate = self
+        }
+    }
+    @IBOutlet weak var chillUpDescription: UITextField! {
+        
+        didSet {
+            
+            chillUpDescription.delegate = self
+        }
+    }
+
+    @IBOutlet weak var chillUpDate: UITextField! {
+        
+        didSet {
+            
+            chillUpDate.delegate = self
+        }
+    }
+    @IBOutlet weak var chillUpCategory: UITextField! {
+        
+        didSet {
+        
+        chillUpCategory.delegate = self
+            
+        }
+    }
+    
+    @IBOutlet weak var chillTime: UITextField! {
+        
+        didSet {
+            
+            chillTime.delegate = self
+        }
+    }
+    
     @IBOutlet weak var mapView: MKMapView! {
         
         didSet {
@@ -47,6 +82,9 @@ class CreateVC: UIViewController {
     let locationManager = CLLocationManager()
     let pinView = MKPointAnnotation()
     var selectedAnnotation: MKPointAnnotation?
+    var placemarkLocation: String?
+    var getLat: Double?
+    var getLong: Double?
 
 
     override func viewDidLoad() {
@@ -60,6 +98,23 @@ class CreateVC: UIViewController {
         
         determineCurrentLocation()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        chillUpDescription.resignFirstResponder()
+        chillTime.resignFirstResponder()
+        chillUpDate.resignFirstResponder()
+        chillUpCategory.resignFirstResponder()
+        chillUpName.resignFirstResponder()
+        
+        return true
+    }
+    
     
     
     func uploadPhotoBtnTapped(_ sender: Any){
@@ -91,8 +146,10 @@ class CreateVC: UIViewController {
             let eventName = chillUpName.text,
             let eventPic = imageURL,
             let eventDesc = chillUpDescription.text,
-            let eventDateandTime = chillUpDateandTime.text,
+            let eventDate = chillUpDate.text,
+            let eventTime = chillTime.text,
             let eventCategory = chillUpCategory.text
+            
         else { return }
         
         let now = Date()
@@ -102,8 +159,12 @@ class CreateVC: UIViewController {
                                     "imageURL": eventPic,
                                     "eventName": eventName,
                                     "eventDescription": eventDesc,
-                                    "eventDateandTime": eventDateandTime,
-                                    "eventCategory": eventCategory]
+                                    "eventDate": eventDate,
+                                    "eventTime": eventTime,
+                                    "eventCategory": eventCategory,
+                                    "placeMarkLocation": placemarkLocation ?? "",
+                                    "lat": getLat ?? "",
+                                    "long": getLong ?? "" ]
         
         let ref = Database.database().reference().child("posts").childByAutoId()
         ref.setValue(param)
@@ -119,6 +180,8 @@ class CreateVC: UIViewController {
     func submitBtnPressed(_ sender: Any) {
         
         self.activityIndicator.startAnimating()
+        
+        self.submitBtn.isEnabled = false
 
         let storageRef = Storage.storage().reference()
         
@@ -147,6 +210,16 @@ class CreateVC: UIViewController {
                 defer {
                     
                     self.dismiss(animated: true, completion: nil)
+                    self.submitBtn.isEnabled = true
+                    
+                    self.chillUpName.text = nil
+                    self.photoImageView.image = nil
+                    self.chillUpDescription.text = nil
+                    self.chillUpDate.text = nil
+                    self.chillTime.text = nil
+                    self.chillUpCategory.text = nil
+                    self.mapView.removeAnnotation(self.selectedAnnotation!)
+                
                 }
                 
                 if let foundError = error {
@@ -162,8 +235,10 @@ class CreateVC: UIViewController {
                 }
                 
                 self.postData(imageURL: imageURL)
+
             }
             
+
             self.tabBarController?.selectedIndex = 0
             self.activityIndicator.stopAnimating()
             
@@ -212,6 +287,23 @@ extension CreateVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
             locationManager.startUpdatingLocation()
         }
     }
+    
+    func loadPlaceMark(location : CLLocation) {
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            if let validError = error{
+                print("GeoCode Error: \(validError.localizedDescription)")
+            }
+            
+            if let placemark = placemarks?.first {
+                
+                self.placemarkLocation = "\(placemark.name ?? "") \(placemark.thoroughfare ?? "") \(placemark.locality ?? "") "
+                
+            }
+        }
+    }
+
 }
 
 extension CreateVC: MKMapViewDelegate {
@@ -241,9 +333,14 @@ extension CreateVC: MKMapViewDelegate {
                 
             else { return }
             
-            let coordinates = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            let coordinates: CLLocation = CLLocation(latitude: lat, longitude: long)
+                
+            self.selectedAnnotation?.title = "Selected Place"
             
-            self.selectedAnnotation?.title = "Selected Location"
+            self.loadPlaceMark(location: coordinates)
+            
+            getLat = lat
+            getLong = long
             
         default:
             

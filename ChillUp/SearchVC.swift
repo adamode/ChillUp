@@ -7,29 +7,115 @@
 //
 
 import UIKit
+import Firebase
+import SDWebImage
 
 class SearchVC: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBOutlet weak var tableView: UITableView!{
+    
+        didSet {
+                tableView.dataSource = self
+                tableView.delegate = self
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBOutlet weak var searchBar: UISearchBar! {
+        
+        didSet {
+        
+            searchBar.delegate = self
+        }
     }
-    */
+    
+    var getAllPost: [ChillData] = []
+    var filteredPost: [ChillData] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        
+        fetchAllPost()
 
+    }
+
+    func fetchAllPost() {
+        
+        let ref = Database.database().reference()
+                
+                ref.child("posts").observe(.childAdded, with: { (snapshot) in
+                    
+                    if let data = ChillData(snapshot: snapshot) {
+                        
+                        self.getAllPost.append(data)
+                    }
+                    
+                    self.filteredPost = self.getAllPost
+                    
+                    self.tableView.reloadData()
+                })
+            }
+    
 }
+
+extension SearchVC: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return filteredPost.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SearchCell
+        
+        let data = filteredPost[indexPath.row]
+        
+        cell.cellLabel?.text = data.eventName
+        
+        cell.cellImageView.sd_setImage(with: data.imageURL)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let chill = filteredPost[indexPath.row]
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let selectedVC = storyboard.instantiateViewController(withIdentifier: "SelectedCellVC") as! SelectedCellVC
+        
+        selectedVC.getCell = chill
+        
+        self.navigationController?.pushViewController(selectedVC, animated: true)
+        
+    }
+}
+
+extension SearchVC: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        filteredPost = searchText.isEmpty ? getAllPost : getAllPost.filter { (item: ChillData) -> Bool in
+            return item.eventName?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.text = nil
+        searchBar.showsCancelButton = false
+        searchBar.endEditing(true)
+        
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+        searchBar.showsCancelButton = true
+
+    }
+}
+

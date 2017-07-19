@@ -47,8 +47,6 @@ class MainVC: UIViewController {
         })
     }
 
-
-
 }
 
 extension MainVC: UITableViewDataSource {

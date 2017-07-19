@@ -18,8 +18,12 @@ class ChillData {
     var imageURL: URL?
     var eventName: String?
     var eventDescription: String?
-    var eventDateandTime: String?
+    var eventDate: String?
+    var eventTime: String?
     var eventCategory: String?
+    var placemarkLocation: String?
+    var lat: Double?
+    var long: Double?
     
     init?(snapshot: DataSnapshot) {
         
@@ -31,23 +35,41 @@ class ChillData {
         let validTimestamp = dictionary["timeStamp"] as? Double,
         let validName = dictionary["userName"] as? String,
         let validEventCategory = dictionary["eventCategory"] as? String,
-        let validEventDateandTime = dictionary["eventDateandTime"] as? String,
+        let validEventDate = dictionary["eventDate"] as? String,
+        let validEventTime = dictionary["eventTime"] as? String,
         let validEventDescription = dictionary["eventDescription"] as? String,
         let validEventName = dictionary["eventName"] as? String
             else { return nil }
         
 
-        self.name = validName
-        self.userID = validUser
-        self.timeStamp = Date(timeIntervalSince1970: validTimestamp)
-        self.eventName = validEventName
-        self.eventCategory = validEventCategory
-        self.eventDescription = validEventDescription
-        self.eventDateandTime = validEventDateandTime
+        name = validName
+        userID = validUser
+        timeStamp = Date(timeIntervalSince1970: validTimestamp)
+        eventName = validEventName
+        eventCategory = validEventCategory
+        eventDescription = validEventDescription
+        eventDate = validEventDate
+        eventTime = validEventTime
         
         if let validImageURL = dictionary["imageURL"] as? String {
             
             self.imageURL = URL(string: validImageURL)
+        }
+        
+        if let validPlacemark = dictionary["placeMarkLocation"] as? String {
+            
+            placemarkLocation = validPlacemark
+        }
+        
+        if let validLat = dictionary["lat"] as? Double {
+            
+            lat = validLat
+        }
+        
+        if let validLong = dictionary["long"] as? Double {
+            
+            long = validLong
+
         }
         
     }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6FB1F1758A2DAEB1BECF4A1D /* Pods_ChillUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567F3E76121352B781B265B /* Pods_ChillUp.framework */; };
+		819049CB1F1F5C2D002C1394 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819049CA1F1F5C2C002C1394 /* SearchCell.swift */; };
 		81DB944C1F1C73870021B825 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DB944B1F1C73870021B825 /* AppDelegate.swift */; };
 		81DB94511F1C73870021B825 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81DB944F1F1C73870021B825 /* Main.storyboard */; };
 		81DB94531F1C73870021B825 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81DB94521F1C73870021B825 /* Assets.xcassets */; };
@@ -23,11 +24,15 @@
 		81FF958F1F1CAC4A00E0EE83 /* MeetupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF958E1F1CAC4A00E0EE83 /* MeetupCell.swift */; };
 		81FF95911F1CBD6400E0EE83 /* ChillData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF95901F1CBD6400E0EE83 /* ChillData.swift */; };
 		81FF95931F1DA7D000E0EE83 /* SelectedCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF95921F1DA7D000E0EE83 /* SelectedCellVC.swift */; };
+		81FF95951F1E15F500E0EE83 /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF95941F1E15F500E0EE83 /* EditVC.swift */; };
+		81FF95971F1E185100E0EE83 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF95961F1E185100E0EE83 /* ProfileCell.swift */; };
+		81FF95991F1E29B900E0EE83 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF95981F1E29B900E0EE83 /* UserProfile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1567F3E76121352B781B265B /* Pods_ChillUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChillUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		468A4A38DF35B0E148D5C97E /* Pods-ChillUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChillUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChillUp/Pods-ChillUp.debug.xcconfig"; sourceTree = "<group>"; };
+		819049CA1F1F5C2C002C1394 /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		81DB94481F1C73870021B825 /* ChillUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChillUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81DB944B1F1C73870021B825 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81DB94501F1C73870021B825 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -45,6 +50,9 @@
 		81FF958E1F1CAC4A00E0EE83 /* MeetupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupCell.swift; sourceTree = "<group>"; };
 		81FF95901F1CBD6400E0EE83 /* ChillData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChillData.swift; sourceTree = "<group>"; };
 		81FF95921F1DA7D000E0EE83 /* SelectedCellVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedCellVC.swift; sourceTree = "<group>"; };
+		81FF95941F1E15F500E0EE83 /* EditVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
+		81FF95961F1E185100E0EE83 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		81FF95981F1E29B900E0EE83 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		BD7B89CC367C8820D0A89688 /* Pods-ChillUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChillUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChillUp/Pods-ChillUp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +74,16 @@
 				1567F3E76121352B781B265B /* Pods_ChillUp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		819049CC1F1F5C32002C1394 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				81FF958E1F1CAC4A00E0EE83 /* MeetupCell.swift */,
+				81FF95961F1E185100E0EE83 /* ProfileCell.swift */,
+				819049CA1F1F5C2C002C1394 /* SearchCell.swift */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		81DB943F1F1C73870021B825 = {
@@ -90,10 +108,11 @@
 			isa = PBXGroup;
 			children = (
 				81DB944B1F1C73870021B825 /* AppDelegate.swift */,
+				81FF957E1F1C7A8F00E0EE83 /* Storyboard */,
+				819049CC1F1F5C32002C1394 /* Cell */,
 				81FF957F1F1C7AA400E0EE83 /* Model */,
 				81FF95811F1C7AB600E0EE83 /* Controller */,
 				81FF95801F1C7AAC00E0EE83 /* View */,
-				81FF957E1F1C7A8F00E0EE83 /* Storyboard */,
 				81DB94521F1C73870021B825 /* Assets.xcassets */,
 				81DB94541F1C73870021B825 /* LaunchScreen.storyboard */,
 				81FF957A1F1C766500E0EE83 /* GoogleService-Info.plist */,
@@ -114,8 +133,8 @@
 		81FF957F1F1C7AA400E0EE83 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				81FF958E1F1CAC4A00E0EE83 /* MeetupCell.swift */,
 				81FF95901F1CBD6400E0EE83 /* ChillData.swift */,
+				81FF95981F1E29B900E0EE83 /* UserProfile.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -133,6 +152,7 @@
 				81FF95821F1C7AF700E0EE83 /* LoginVC.swift */,
 				81FF95841F1C7B0400E0EE83 /* RegisterVC.swift */,
 				81FF95861F1C86AE00E0EE83 /* MainVC.swift */,
+				81FF95941F1E15F500E0EE83 /* EditVC.swift */,
 				81FF95881F1CA90700E0EE83 /* SearchVC.swift */,
 				81FF958C1F1CA96500E0EE83 /* ProfileVC.swift */,
 				81FF958A1F1CA91300E0EE83 /* CreateVC.swift */,
@@ -276,16 +296,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81FF95951F1E15F500E0EE83 /* EditVC.swift in Sources */,
 				81FF95851F1C7B0400E0EE83 /* RegisterVC.swift in Sources */,
 				81FF95891F1CA90700E0EE83 /* SearchVC.swift in Sources */,
+				819049CB1F1F5C2D002C1394 /* SearchCell.swift in Sources */,
 				81FF958D1F1CA96500E0EE83 /* ProfileVC.swift in Sources */,
 				81FF958F1F1CAC4A00E0EE83 /* MeetupCell.swift in Sources */,
 				81FF95871F1C86AE00E0EE83 /* MainVC.swift in Sources */,
 				81FF95931F1DA7D000E0EE83 /* SelectedCellVC.swift in Sources */,
 				81FF95831F1C7AF700E0EE83 /* LoginVC.swift in Sources */,
 				81FF958B1F1CA91300E0EE83 /* CreateVC.swift in Sources */,
+				81FF95971F1E185100E0EE83 /* ProfileCell.swift in Sources */,
 				81DB944C1F1C73870021B825 /* AppDelegate.swift in Sources */,
 				81FF95911F1CBD6400E0EE83 /* ChillData.swift in Sources */,
+				81FF95991F1E29B900E0EE83 /* UserProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

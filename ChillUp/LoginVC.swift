@@ -65,6 +65,8 @@ class LoginVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         
         activityIndicator.color = UIColor(red: 0.25, green: 0.72, blue: 0.85, alpha: 1.0)
         activityIndicator.backgroundColor = UIColor.gray
+        
+        
 
     }
     
@@ -78,10 +80,12 @@ class LoginVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         self.view.endEditing(true)
     }
     
+
+    
     func registerBtnTapped(_ sender:Any) {
         
         let storyboard = UIStoryboard(name: "Auth", bundle: Bundle.main)
-        let registerVC = storyboard.instantiateViewController(withIdentifier: "RegisterVC")
+        let registerVC = storyboard.instantiateViewController(withIdentifier: "RegisterVC") as! RegisterVC
         self.navigationController?.pushViewController(registerVC, animated: true)
     }
 
