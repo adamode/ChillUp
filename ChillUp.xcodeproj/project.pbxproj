@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		6FB1F1758A2DAEB1BECF4A1D /* Pods_ChillUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567F3E76121352B781B265B /* Pods_ChillUp.framework */; };
+		812F22181F20558500ADE18F /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812F22171F20558500ADE18F /* ListCell.swift */; };
+		812F221A1F206F5B00ADE18F /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812F22191F206F5B00ADE18F /* CircleView.swift */; };
+		812F22201F207E6800ADE18F /* KaedeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812F221F1F207E6800ADE18F /* KaedeTextField.swift */; };
+		812F22221F207F4D00ADE18F /* TextFieldEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812F22211F207F4D00ADE18F /* TextFieldEffects.swift */; };
+		812F22241F2080E200ADE18F /* TextFieldEffects in Resources */ = {isa = PBXBuildFile; fileRef = 812F22231F2080E200ADE18F /* TextFieldEffects */; };
+		812F22261F2081FC00ADE18F /* FirstPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812F22251F2081FC00ADE18F /* FirstPageVC.swift */; };
 		819049CB1F1F5C2D002C1394 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819049CA1F1F5C2C002C1394 /* SearchCell.swift */; };
 		81DB944C1F1C73870021B825 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DB944B1F1C73870021B825 /* AppDelegate.swift */; };
 		81DB94511F1C73870021B825 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81DB944F1F1C73870021B825 /* Main.storyboard */; };
@@ -32,6 +38,12 @@
 /* Begin PBXFileReference section */
 		1567F3E76121352B781B265B /* Pods_ChillUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChillUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		468A4A38DF35B0E148D5C97E /* Pods-ChillUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChillUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChillUp/Pods-ChillUp.debug.xcconfig"; sourceTree = "<group>"; };
+		812F22171F20558500ADE18F /* ListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
+		812F22191F206F5B00ADE18F /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		812F221F1F207E6800ADE18F /* KaedeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KaedeTextField.swift; path = TextFieldEffects/KaedeTextField.swift; sourceTree = "<group>"; };
+		812F22211F207F4D00ADE18F /* TextFieldEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextFieldEffects.swift; path = TextFieldEffects/TextFieldEffects.swift; sourceTree = "<group>"; };
+		812F22231F2080E200ADE18F /* TextFieldEffects */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TextFieldEffects; sourceTree = "<group>"; };
+		812F22251F2081FC00ADE18F /* FirstPageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstPageVC.swift; sourceTree = "<group>"; };
 		819049CA1F1F5C2C002C1394 /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		81DB94481F1C73870021B825 /* ChillUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChillUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81DB944B1F1C73870021B825 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,9 +91,13 @@
 		819049CC1F1F5C32002C1394 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				812F22211F207F4D00ADE18F /* TextFieldEffects.swift */,
+				812F221F1F207E6800ADE18F /* KaedeTextField.swift */,
+				812F22191F206F5B00ADE18F /* CircleView.swift */,
 				81FF958E1F1CAC4A00E0EE83 /* MeetupCell.swift */,
 				81FF95961F1E185100E0EE83 /* ProfileCell.swift */,
 				819049CA1F1F5C2C002C1394 /* SearchCell.swift */,
+				812F22171F20558500ADE18F /* ListCell.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -114,6 +130,7 @@
 				81FF95811F1C7AB600E0EE83 /* Controller */,
 				81FF95801F1C7AAC00E0EE83 /* View */,
 				81DB94521F1C73870021B825 /* Assets.xcassets */,
+				812F22231F2080E200ADE18F /* TextFieldEffects */,
 				81DB94541F1C73870021B825 /* LaunchScreen.storyboard */,
 				81FF957A1F1C766500E0EE83 /* GoogleService-Info.plist */,
 				81DB94571F1C73870021B825 /* Info.plist */,
@@ -149,6 +166,7 @@
 		81FF95811F1C7AB600E0EE83 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				812F22251F2081FC00ADE18F /* FirstPageVC.swift */,
 				81FF95821F1C7AF700E0EE83 /* LoginVC.swift */,
 				81FF95841F1C7B0400E0EE83 /* RegisterVC.swift */,
 				81FF95861F1C86AE00E0EE83 /* MainVC.swift */,
@@ -236,6 +254,7 @@
 				81DB94561F1C73870021B825 /* LaunchScreen.storyboard in Resources */,
 				81FF957B1F1C766500E0EE83 /* GoogleService-Info.plist in Resources */,
 				81FF957D1F1C7A5D00E0EE83 /* Auth.storyboard in Resources */,
+				812F22241F2080E200ADE18F /* TextFieldEffects in Resources */,
 				81DB94531F1C73870021B825 /* Assets.xcassets in Resources */,
 				81DB94511F1C73870021B825 /* Main.storyboard in Resources */,
 			);
@@ -299,10 +318,15 @@
 				81FF95951F1E15F500E0EE83 /* EditVC.swift in Sources */,
 				81FF95851F1C7B0400E0EE83 /* RegisterVC.swift in Sources */,
 				81FF95891F1CA90700E0EE83 /* SearchVC.swift in Sources */,
+				812F22201F207E6800ADE18F /* KaedeTextField.swift in Sources */,
+				812F22181F20558500ADE18F /* ListCell.swift in Sources */,
 				819049CB1F1F5C2D002C1394 /* SearchCell.swift in Sources */,
 				81FF958D1F1CA96500E0EE83 /* ProfileVC.swift in Sources */,
 				81FF958F1F1CAC4A00E0EE83 /* MeetupCell.swift in Sources */,
+				812F22221F207F4D00ADE18F /* TextFieldEffects.swift in Sources */,
+				812F22261F2081FC00ADE18F /* FirstPageVC.swift in Sources */,
 				81FF95871F1C86AE00E0EE83 /* MainVC.swift in Sources */,
+				812F221A1F206F5B00ADE18F /* CircleView.swift in Sources */,
 				81FF95931F1DA7D000E0EE83 /* SelectedCellVC.swift in Sources */,
 				81FF95831F1C7AF700E0EE83 /* LoginVC.swift in Sources */,
 				81FF958B1F1CA91300E0EE83 /* CreateVC.swift in Sources */,

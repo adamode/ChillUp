@@ -15,5 +15,6 @@ target 'ChillUp' do
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
   pod 'SDWebImage'
+  pod 'TextFieldEffects'
 
 end

@@ -23,6 +23,7 @@ class SelectedCellVC: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView! {
         
         didSet{
@@ -40,6 +41,7 @@ class SelectedCellVC: UIViewController {
     }
     
     var isJoining = false
+    
     var currentUserID = Auth.auth().currentUser?.uid
 
     override func viewDidLoad() {
@@ -50,6 +52,7 @@ class SelectedCellVC: UIViewController {
         self.eventTitle.text = getCell?.eventName
         self.descriptionLabel.text = getCell?.eventDescription
         self.timeLabel.text = getCell?.eventTime
+        self.endTimeLabel.text = getCell?.eventEndTime
         self.dateLabel.text = getCell?.eventDate
         self.categoryLabel.text = getCell?.eventCategory
         self.eventImageView.sd_setImage(with: getCell?.imageURL)

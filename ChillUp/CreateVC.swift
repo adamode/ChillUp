@@ -74,6 +74,15 @@ class CreateVC: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBOutlet weak var chillEndTime: UITextField! {
+        
+        didSet {
+            
+            chillEndTime.delegate = self
+        }
+    }
+    
+    
     @IBOutlet weak var photoImageView: UIImageView!
     
     var getUsername : String = ""
@@ -85,6 +94,12 @@ class CreateVC: UIViewController, UITextFieldDelegate {
     var placemarkLocation: String?
     var getLat: Double?
     var getLong: Double?
+    let datePicker = UIDatePicker()
+    let timePicker = UIDatePicker()
+    let endTimePicker = UIDatePicker()
+    let categoryPicker = UIPickerView()
+    var selectedRow = 0
+    let categoryArray = ["Gaming", "Discussion", "Social"]
 
 
     override func viewDidLoad() {
@@ -97,12 +112,161 @@ class CreateVC: UIViewController, UITextFieldDelegate {
         activityIndicator.backgroundColor = UIColor.gray
         
         determineCurrentLocation()
+        
+        categoryPicker.delegate = self
+        categoryPicker.dataSource = self
+
+        chooseCategory()
+        showDatePicker()
+        showTimePicker()
+        showEndTimePicker()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         self.view.endEditing(true)
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.navigationController?.isNavigationBarHidden = false
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
+        
+    }
+    
+    // Date Picker
+    
+    func showDatePicker() {
+        
+        datePicker.datePickerMode = .date
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(doneDatePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(cancelDatePicker))
+        toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
+        
+        chillUpDate.inputAccessoryView = toolbar
+        chillUpDate.inputView = datePicker
+    }
+    
+    func doneDatePicker() {
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        chillUpDate.text = formatter.string(from: datePicker.date)
+        self.view.endEditing(true)
+    }
+    
+    func cancelDatePicker() {
+        
+        self.view.endEditing(true)
+    }
+    // Time Picker
+    
+    func showTimePicker() {
+        
+        timePicker.datePickerMode = .time
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(doneTimePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(cancelTimePicker))
+        toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
+        
+        chillTime.inputAccessoryView = toolbar
+        chillTime.inputView = timePicker
+    }
+    
+    func doneTimePicker() {
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = " hh:mm a"
+        chillTime.text = formatter.string(from: timePicker.date)
+        self.view.endEditing(true)
+    }
+    
+    func cancelTimePicker() {
+        
+        self.view.endEditing(true)
+    }
+    
+    // End Time Picker
+    
+    func showEndTimePicker() {
+        
+        endTimePicker.datePickerMode = .time
+
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(doneEndTimePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(cancelEndTimePicker))
+        toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
+        
+        chillEndTime.inputAccessoryView = toolbar
+        chillEndTime.inputView = endTimePicker
+    }
+    
+    func doneEndTimePicker() {
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = " hh:mm a"
+        chillEndTime.text = formatter.string(from: endTimePicker.date)
+        self.view.endEditing(true)
+    }
+    
+    func cancelEndTimePicker() {
+        
+        self.view.endEditing(true)
+    }
+    
+    // Category Picker 
+    
+    
+    func chooseCategory() {
+        
+        let pickerView = categoryPicker
+        pickerView.backgroundColor = .white
+        pickerView.showsSelectionIndicator = true
+        
+        let toolBar = UIToolbar()
+        
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(cancelPicker))
+        
+        toolBar.setItems([doneButton, spaceButton, cancelButton], animated: false)
+        
+        chillUpCategory.inputView = pickerView
+        chillUpCategory.inputAccessoryView = toolBar
+    }
+    
+    func donePicker() {
+        
+        self.chillUpCategory.text = categoryArray[selectedRow]
+        chillUpCategory.resignFirstResponder()
+    }
+    
+    func cancelPicker() {
+        
+        chillUpCategory.resignFirstResponder()
+    }
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
@@ -114,8 +278,6 @@ class CreateVC: UIViewController, UITextFieldDelegate {
         
         return true
     }
-    
-    
     
     func uploadPhotoBtnTapped(_ sender: Any){
         
@@ -148,7 +310,8 @@ class CreateVC: UIViewController, UITextFieldDelegate {
             let eventDesc = chillUpDescription.text,
             let eventDate = chillUpDate.text,
             let eventTime = chillTime.text,
-            let eventCategory = chillUpCategory.text
+            let eventCategory = chillUpCategory.text,
+            let eventEndTime = chillEndTime.text
             
         else { return }
         
@@ -161,6 +324,7 @@ class CreateVC: UIViewController, UITextFieldDelegate {
                                     "eventDescription": eventDesc,
                                     "eventDate": eventDate,
                                     "eventTime": eventTime,
+                                    "eventEndTime": eventEndTime,
                                     "eventCategory": eventCategory,
                                     "placeMarkLocation": placemarkLocation ?? "",
                                     "lat": getLat ?? "",
@@ -237,11 +401,8 @@ class CreateVC: UIViewController, UITextFieldDelegate {
                 self.postData(imageURL: imageURL)
 
             }
-            
-
             self.tabBarController?.selectedIndex = 0
             self.activityIndicator.stopAnimating()
-            
         }
     }
     
@@ -252,7 +413,6 @@ class CreateVC: UIViewController, UITextFieldDelegate {
         
         view.addSubview(activityIndicator)
     }
-
 }
 
 extension CreateVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -291,19 +451,33 @@ extension CreateVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
     func loadPlaceMark(location : CLLocation) {
         
         let geocoder = CLGeocoder()
+        
         geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            
             if let validError = error{
+                
                 print("GeoCode Error: \(validError.localizedDescription)")
             }
             
             if let placemark = placemarks?.first {
+                var text : [String] = []
                 
-                self.placemarkLocation = "\(placemark.name ?? "") \(placemark.thoroughfare ?? "") \(placemark.locality ?? "") "
+                for item in [placemark.name, placemark.thoroughfare, placemark.locality] {
+                    
+                    if let name = item { text.append(name) }
+                }
                 
+                let finalText = text.joined(separator: ", ")
+                
+                self.placemarkLocation = finalText
+                
+                if let displayTextOnPin = self.placemarkLocation {
+                    
+                    self.selectedAnnotation?.title = "\(displayTextOnPin)"
+                }
             }
         }
     }
-
 }
 
 extension CreateVC: MKMapViewDelegate {
@@ -334,8 +508,6 @@ extension CreateVC: MKMapViewDelegate {
             else { return }
             
             let coordinates: CLLocation = CLLocation(latitude: lat, longitude: long)
-                
-            self.selectedAnnotation?.title = "Selected Place"
             
             self.loadPlaceMark(location: coordinates)
             
@@ -372,4 +544,28 @@ extension CreateVC: CLLocationManagerDelegate {
         
         selectedAnnotation = view.annotation as? MKPointAnnotation
     }
+}
+
+extension CreateVC: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        return categoryArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        return categoryArray[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        selectedRow = row
+    }
+
 }

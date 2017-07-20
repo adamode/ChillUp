@@ -66,14 +66,27 @@ class LoginVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         activityIndicator.color = UIColor(red: 0.25, green: 0.72, blue: 0.85, alpha: 1.0)
         activityIndicator.backgroundColor = UIColor.gray
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
         
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.isNavigationBarHidden = false
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
+        
     }
+
+    
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -207,6 +220,29 @@ class LoginVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         activityIndicator.center = view.center
         activityIndicator.hidesWhenStopped = true
         view.addSubview(activityIndicator)
+    }
+
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            if self.view.frame.origin.y == 0 {
+                
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            if self.view.frame.origin.y != 0 {
+                
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

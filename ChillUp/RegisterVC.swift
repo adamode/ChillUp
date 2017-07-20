@@ -78,6 +78,7 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
         
         self.navigationController?.isNavigationBarHidden = false
     }
+
     
     func keyboardWillShow(notification: NSNotification) {
         
@@ -143,16 +144,33 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        
+//        nameTextField.resignFirstResponder()
+//        emailTextField.resignFirstResponder()
+//        passwordTextField.resignFirstResponder()
+//        confirmPasswordTextField.resignFirstResponder()
+//        
+//        return true
+//    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        nameTextField.resignFirstResponder()
-        emailTextField.resignFirstResponder()
-        passwordTextField.resignFirstResponder()
-        confirmPasswordTextField.resignFirstResponder()
+        if textField == nameTextField {
+            
+            emailTextField.becomeFirstResponder()
+            
+        } else if textField == emailTextField {
+            
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            confirmPasswordTextField.becomeFirstResponder()
+        } else if textField == confirmPasswordTextField {
+            confirmPasswordTextField.resignFirstResponder()
+        }
         
         return true
     }
-    
 
     func choosePhotoBtnTapped(_ sender : Any) {
         

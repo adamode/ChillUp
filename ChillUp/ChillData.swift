@@ -20,6 +20,7 @@ class ChillData {
     var eventDescription: String?
     var eventDate: String?
     var eventTime: String?
+    var eventEndTime: String?
     var eventCategory: String?
     var placemarkLocation: String?
     var lat: Double?
@@ -37,6 +38,7 @@ class ChillData {
         let validEventCategory = dictionary["eventCategory"] as? String,
         let validEventDate = dictionary["eventDate"] as? String,
         let validEventTime = dictionary["eventTime"] as? String,
+        let validEventEndTime = dictionary["eventEndTime"] as? String,
         let validEventDescription = dictionary["eventDescription"] as? String,
         let validEventName = dictionary["eventName"] as? String
             else { return nil }
@@ -50,6 +52,7 @@ class ChillData {
         eventDescription = validEventDescription
         eventDate = validEventDate
         eventTime = validEventTime
+        eventEndTime = validEventEndTime
         
         if let validImageURL = dictionary["imageURL"] as? String {
             
