@@ -51,14 +51,14 @@ class SelectedCellVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.getUsername.text = "Organizer: \(getCell?.name ?? "")"
+        self.getUsername.text = "Organizer: \(getCell?.name?.capitalized ?? "")"
         self.getLocation.text = getCell?.placemarkLocation
-        self.eventTitle.text = "Event: \(getCell?.eventName ?? "")"
+        self.eventTitle.text = "Event: \(getCell?.eventName?.capitalized ?? "")"
         self.descriptionLabel.text = getCell?.eventDescription
         self.timeLabel.text = getCell?.eventTime
         self.endTimeLabel.text = getCell?.eventEndTime
         self.dateLabel.text = getCell?.eventDate
-        self.categoryLabel.text = "Category: \(getCell?.eventCategory ?? "")"
+        self.categoryLabel.text = "Category: \(getCell?.eventCategory?.capitalized ?? "")"
         self.eventImageView.sd_setImage(with: getCell?.imageURL)
         
         let yourLocation = MKPointAnnotation()

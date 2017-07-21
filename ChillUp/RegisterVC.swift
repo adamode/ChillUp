@@ -78,6 +78,8 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        setupSpinner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -184,6 +186,8 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
     
     func signUpBtnTapped(_ sender : Any) {
         
+        self.activityIndicator.startAnimating()
+        
         guard
             let name = nameTextField.text,
             let email = emailTextField.text,
@@ -216,6 +220,8 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
             
         } else {
             
+            self.activityIndicator.startAnimating()
+
             Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
                 
                 if let validError = error {
