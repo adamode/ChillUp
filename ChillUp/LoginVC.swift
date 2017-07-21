@@ -12,7 +12,7 @@ import FirebaseAuth
 import FBSDKLoginKit
 
 class LoginVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
-
+    
     @IBOutlet weak var emailTextField: UITextField! {
         
         didSet {
@@ -46,14 +46,20 @@ class LoginVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         didSet {
             
             loginBtn.addTarget(self, action: #selector(loginBtnTapped(_:)), for: .touchUpInside)
+            loginBtn.layer.cornerRadius = 15
+            loginBtn.layer.borderWidth = 1
+            loginBtn.layer.borderColor = UIColor.black.cgColor
         }
     }
     
     @IBOutlet weak var registerBtn: UIButton! {
         
         didSet {
-        
-        registerBtn.addTarget(self, action: #selector(registerBtnTapped(_:)), for: .touchUpInside)
+            
+            registerBtn.addTarget(self, action: #selector(registerBtnTapped(_:)), for: .touchUpInside)
+            registerBtn.layer.cornerRadius = 15
+            registerBtn.layer.borderWidth = 1
+            registerBtn.layer.borderColor = UIColor.black.cgColor
             
         }
     }
@@ -63,14 +69,20 @@ class LoginVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupSpinner()
+        
         activityIndicator.color = UIColor(red: 0.25, green: 0.72, blue: 0.85, alpha: 1.0)
-        activityIndicator.backgroundColor = UIColor.gray
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
+    }
+    
+    func setupSpinner() {
         
-
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,7 +96,7 @@ class LoginVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
         
     }
-
+    
     
     
     
@@ -93,7 +105,7 @@ class LoginVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         self.view.endEditing(true)
     }
     
-
+    
     
     func registerBtnTapped(_ sender:Any) {
         
@@ -101,14 +113,14 @@ class LoginVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         let registerVC = storyboard.instantiateViewController(withIdentifier: "RegisterVC") as! RegisterVC
         self.navigationController?.pushViewController(registerVC, animated: true)
     }
-
+    
     func loginBtnTapped(_ sender:Any) {
         
         activityIndicator.startAnimating()
         
         guard let email = emailTextField.text,
-              let password = passwordTextField.text
-        else {
+            let password = passwordTextField.text
+            else {
                 return
         }
         
@@ -215,13 +227,7 @@ class LoginVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         warningAlert(warningMessage: "Facebook logged out")
     }
     
-    func setupSpinner() {
-        
-        activityIndicator.center = view.center
-        activityIndicator.hidesWhenStopped = true
-        view.addSubview(activityIndicator)
-    }
-
+    
     func keyboardWillShow(notification: NSNotification) {
         
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -268,5 +274,5 @@ class LoginVC: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
         self.activityIndicator.stopAnimating()
         
     }
-
+    
 }

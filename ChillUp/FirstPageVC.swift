@@ -9,12 +9,15 @@
 import UIKit
 
 class FirstPageVC: UIViewController {
-
+    
     @IBOutlet weak var signInBtn: UIButton! {
         
         didSet {
             
             signInBtn.addTarget(self, action: #selector(signInBtnTapped(_:)), for: .touchUpInside)
+            signInBtn.layer.cornerRadius = 15
+            signInBtn.layer.borderWidth = 1
+            signInBtn.layer.borderColor = UIColor.black.cgColor
         }
     }
     @IBOutlet weak var signUpBtn: UIButton! {
@@ -22,12 +25,15 @@ class FirstPageVC: UIViewController {
         didSet {
             
             signUpBtn.addTarget(self, action: #selector(signUpBtnTapped(_:)), for: .touchUpInside)
+            signUpBtn.layer.cornerRadius = 15
+            signUpBtn.layer.borderWidth = 1
+            signUpBtn.layer.borderColor = UIColor.black.cgColor
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -55,9 +61,5 @@ class FirstPageVC: UIViewController {
         let storyboard = UIStoryboard(name: "Auth", bundle: Bundle.main)
         let registerVC = storyboard.instantiateViewController(withIdentifier: "RegisterVC") as! RegisterVC
         self.navigationController?.pushViewController(registerVC, animated: true)
-        
-        
     }
-    
-
 }

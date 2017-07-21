@@ -52,6 +52,9 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.11)
+  - NVActivityIndicatorView (3.7.0):
+    - NVActivityIndicatorView/Presenter (= 3.7.0)
+  - NVActivityIndicatorView/Presenter (3.7.0)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -65,6 +68,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - NVActivityIndicatorView
   - SDWebImage
   - TextFieldEffects
 
@@ -82,9 +86,10 @@ SPEC CHECKSUMS:
   FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
+  NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   TextFieldEffects: 8706f53525f1ce51c8921b7af32237caab50c467
 
-PODFILE CHECKSUM: 4a0f854d622bc652b5e2131e5cc240377fd262dc
+PODFILE CHECKSUM: 1695ae6dd04e82e0043afc162c4c45e07563d75b
 
 COCOAPODS: 1.1.1

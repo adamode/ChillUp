@@ -11,7 +11,7 @@ import MapKit
 import Firebase
 
 class CreateVC: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var chillUpName: UITextField! {
         
         didSet {
@@ -26,7 +26,7 @@ class CreateVC: UIViewController, UITextFieldDelegate {
             chillUpDescription.delegate = self
         }
     }
-
+    
     @IBOutlet weak var chillUpDate: UITextField! {
         
         didSet {
@@ -37,8 +37,8 @@ class CreateVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var chillUpCategory: UITextField! {
         
         didSet {
-        
-        chillUpCategory.delegate = self
+            
+            chillUpCategory.delegate = self
             
         }
     }
@@ -64,6 +64,9 @@ class CreateVC: UIViewController, UITextFieldDelegate {
         didSet {
             
             submitBtn.addTarget(self, action: #selector(submitBtnPressed(_:)), for: .touchUpInside)
+            submitBtn.layer.cornerRadius = 15
+            submitBtn.layer.borderWidth = 1
+            submitBtn.layer.borderColor = UIColor.black.cgColor
         }
     }
     @IBOutlet weak var uploadPhotoBtn: UIButton! {
@@ -71,6 +74,9 @@ class CreateVC: UIViewController, UITextFieldDelegate {
         didSet {
             
             uploadPhotoBtn.addTarget(self, action: #selector(uploadPhotoBtnTapped(_:)), for: .touchUpInside)
+            uploadPhotoBtn.layer.cornerRadius = 15
+            uploadPhotoBtn.layer.borderWidth = 1
+            uploadPhotoBtn.layer.borderColor = UIColor.black.cgColor
         }
     }
     
@@ -84,6 +90,7 @@ class CreateVC: UIViewController, UITextFieldDelegate {
     
     
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var getUsername : String = ""
     var isImageSelected = false
@@ -99,27 +106,28 @@ class CreateVC: UIViewController, UITextFieldDelegate {
     let endTimePicker = UIDatePicker()
     let categoryPicker = UIPickerView()
     var selectedRow = 0
-    let categoryArray = ["Gaming", "Discussion", "Social"]
-
-
+    let categoryArray = ["Outdoors & Adventure","Tech","Family","Health & Wellness","Sport & Fitness","Learning","Photography","Food & Drink","Writing","Language & Culture","Music","Movements","Film","Games","Beliefs", "Arts","Normal Gathering","Book Clubs","Pets","Dance","Career & Business","Social","Fashion & Beauty","Hobbies"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         getUsernameFromFirebase()
         setupSpinner()
         
         activityIndicator.color = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
-        activityIndicator.backgroundColor = UIColor.gray
         
         determineCurrentLocation()
         
         categoryPicker.delegate = self
         categoryPicker.dataSource = self
-
+        
         chooseCategory()
         showDatePicker()
         showTimePicker()
         showEndTimePicker()
+        
+        scrollView.keyboardDismissMode = .onDrag
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -205,7 +213,7 @@ class CreateVC: UIViewController, UITextFieldDelegate {
     func showEndTimePicker() {
         
         endTimePicker.datePickerMode = .time
-
+        
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
@@ -231,7 +239,7 @@ class CreateVC: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-    // Category Picker 
+    // Category Picker
     
     
     func chooseCategory() {
@@ -267,7 +275,6 @@ class CreateVC: UIViewController, UITextFieldDelegate {
         chillUpCategory.resignFirstResponder()
     }
     
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         chillUpDescription.resignFirstResponder()
@@ -284,7 +291,7 @@ class CreateVC: UIViewController, UITextFieldDelegate {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
-
+        
     }
     
     func getUsernameFromFirebase() {
@@ -294,7 +301,7 @@ class CreateVC: UIViewController, UITextFieldDelegate {
         Database.database().reference().child("users").child(uid!).observe(.value, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String:Any],
-               let name = dictionary["name"] as? String {
+                let name = dictionary["name"] as? String {
                 
                 self.getUsername = name
             }
@@ -313,7 +320,7 @@ class CreateVC: UIViewController, UITextFieldDelegate {
             let eventCategory = chillUpCategory.text,
             let eventEndTime = chillEndTime.text
             
-        else { return }
+            else { return }
         
         let now = Date()
         let param : [String:Any] = ["userID" : uid,
@@ -346,7 +353,7 @@ class CreateVC: UIViewController, UITextFieldDelegate {
         self.activityIndicator.startAnimating()
         
         self.submitBtn.isEnabled = false
-
+        
         let storageRef = Storage.storage().reference()
         
         let metadata = StorageMetadata()
@@ -369,6 +376,7 @@ class CreateVC: UIViewController, UITextFieldDelegate {
             if ( error != nil) {
                 
                 print(error!)
+                
             } else {
                 
                 defer {
@@ -383,7 +391,7 @@ class CreateVC: UIViewController, UITextFieldDelegate {
                     self.chillTime.text = nil
                     self.chillUpCategory.text = nil
                     self.mapView.removeAnnotation(self.selectedAnnotation!)
-                
+                    
                 }
                 
                 if let foundError = error {
@@ -399,7 +407,7 @@ class CreateVC: UIViewController, UITextFieldDelegate {
                 }
                 
                 self.postData(imageURL: imageURL)
-
+                
             }
             self.tabBarController?.selectedIndex = 0
             self.activityIndicator.stopAnimating()
@@ -460,6 +468,7 @@ extension CreateVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
             }
             
             if let placemark = placemarks?.first {
+                
                 var text : [String] = []
                 
                 for item in [placemark.name, placemark.thoroughfare, placemark.locality] {
@@ -502,10 +511,10 @@ extension CreateVC: MKMapViewDelegate {
         case .ending, .canceling:
             guard
                 
-            let lat = view.annotation?.coordinate.latitude,
-            let long = view.annotation?.coordinate.longitude
+                let lat = view.annotation?.coordinate.latitude,
+                let long = view.annotation?.coordinate.longitude
                 
-            else { return }
+                else { return }
             
             let coordinates: CLLocation = CLLocation(latitude: lat, longitude: long)
             
@@ -522,22 +531,22 @@ extension CreateVC: MKMapViewDelegate {
 }
 
 extension CreateVC: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            
-            let locValue:CLLocationCoordinate2D = (manager.location?.coordinate)!
-            
-            let span = MKCoordinateSpanMake(0.05, 0.05)
-            
-            let region = MKCoordinateRegionMake(locValue, span)
-            
-            self.locationManager.stopUpdatingLocation()
-            
-            pinView.coordinate = locValue
-            pinView.title = "CURRENT LOCATION"
-            
-            mapView.addAnnotation(pinView)
-            mapView.setRegion(region, animated: true)
+        let locValue:CLLocationCoordinate2D = (manager.location?.coordinate)!
+        
+        let span = MKCoordinateSpanMake(0.05, 0.05)
+        
+        let region = MKCoordinateRegionMake(locValue, span)
+        
+        self.locationManager.stopUpdatingLocation()
+        
+        pinView.coordinate = locValue
+        pinView.title = "CURRENT LOCATION"
+        
+        mapView.addAnnotation(pinView)
+        mapView.setRegion(region, animated: true)
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -567,5 +576,5 @@ extension CreateVC: UIPickerViewDelegate, UIPickerViewDataSource {
         
         selectedRow = row
     }
-
+    
 }

@@ -16,5 +16,6 @@ target 'ChillUp' do
   pod 'FBSDKLoginKit'
   pod 'SDWebImage'
   pod 'TextFieldEffects'
+  pod 'NVActivityIndicatorView'
 
 end

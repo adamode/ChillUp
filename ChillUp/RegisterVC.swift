@@ -12,12 +12,15 @@ import FirebaseStorage
 import FirebaseDatabase
 
 class RegisterVC: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var choosePhotoBtn: UIButton! {
         
         didSet {
             
             choosePhotoBtn.addTarget(self, action: #selector(choosePhotoBtnTapped(_:)), for: .touchUpInside)
+            choosePhotoBtn.layer.cornerRadius = 15
+            choosePhotoBtn.layer.borderWidth = 1
+            choosePhotoBtn.layer.borderColor = UIColor.black.cgColor
         }
     }
     @IBOutlet weak var signUpBtn: UIButton! {
@@ -25,6 +28,9 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
         didSet {
             
             signUpBtn.addTarget(self, action: #selector(signUpBtnTapped(_:)), for: .touchUpInside)
+            signUpBtn.layer.cornerRadius = 15
+            signUpBtn.layer.borderWidth = 1
+            signUpBtn.layer.borderColor = UIColor.black.cgColor
         }
     }
     @IBOutlet weak var confirmPasswordTextField: UITextField! {
@@ -77,8 +83,15 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         
         self.navigationController?.isNavigationBarHidden = false
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
+        
     }
-
+    
     
     func keyboardWillShow(notification: NSNotification) {
         
@@ -102,7 +115,7 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
         }
         
     }
-
+    
     
     func imageTapped(sender: UITapGestureRecognizer) {
         
@@ -143,17 +156,7 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
         
         self.view.endEditing(true)
     }
-    
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        
-//        nameTextField.resignFirstResponder()
-//        emailTextField.resignFirstResponder()
-//        passwordTextField.resignFirstResponder()
-//        confirmPasswordTextField.resignFirstResponder()
-//        
-//        return true
-//    }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField == nameTextField {
@@ -171,7 +174,7 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
         
         return true
     }
-
+    
     func choosePhotoBtnTapped(_ sender : Any) {
         
         let imagePicker = UIImagePickerController()
@@ -252,7 +255,7 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
                             print(foundError.localizedDescription)
                             
                             return
-                        
+                            
                         }
                         
                         guard let imageURL = newMeta?.downloadURLs?.first?.absoluteString else {
@@ -276,7 +279,7 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
                 print("User sign-up successfully! \(user?.uid ?? "")")
                 print("User email address! \(user?.email ?? "")")
                 print("Username is \(name)")
-
+                
             })
         }
     }

@@ -11,19 +11,23 @@ import Firebase
 import SDWebImage
 
 class SearchVC: UIViewController {
-
-    @IBOutlet weak var tableView: UITableView!{
     
+    @IBOutlet weak var tableView: UITableView!{
+        
         didSet {
-                tableView.dataSource = self
-                tableView.delegate = self
+            
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.layer.masksToBounds = true
+            tableView.layer.borderColor = UIColor( red: 153/255, green: 153/255, blue:0/255, alpha: 1.0 ).cgColor
+            tableView.layer.borderWidth = 1.0
         }
     }
     
     @IBOutlet weak var searchBar: UISearchBar! {
         
         didSet {
-        
+            
             searchBar.delegate = self
         }
     }
@@ -34,28 +38,38 @@ class SearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         fetchAllPost()
-
+        
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.navigationController?.isNavigationBarHidden = false
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
+        
+    }
+    
     func fetchAllPost() {
         
         let ref = Database.database().reference()
+        
+        ref.child("posts").observe(.childAdded, with: { (snapshot) in
+            
+            if let data = ChillData(snapshot: snapshot) {
                 
-                ref.child("posts").observe(.childAdded, with: { (snapshot) in
-                    
-                    if let data = ChillData(snapshot: snapshot) {
-                        
-                        self.getAllPost.append(data)
-                    }
-                    
-                    self.filteredPost = self.getAllPost
-                    
-                    self.tableView.reloadData()
-                })
+                self.getAllPost.append(data)
             }
+            
+            self.filteredPost = self.getAllPost
+            
+            self.tableView.reloadData()
+        })
+    }
     
 }
 
@@ -115,7 +129,7 @@ extension SearchVC: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         
         searchBar.showsCancelButton = true
-
+        
     }
 }
 

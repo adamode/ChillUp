@@ -31,19 +31,19 @@ class ChillData {
         self.pid = snapshot.key
         
         guard
-        let dictionary = snapshot.value as? [String:Any],
-        let validUser = dictionary["userID"] as? String,
-        let validTimestamp = dictionary["timeStamp"] as? Double,
-        let validName = dictionary["userName"] as? String,
-        let validEventCategory = dictionary["eventCategory"] as? String,
-        let validEventDate = dictionary["eventDate"] as? String,
-        let validEventTime = dictionary["eventTime"] as? String,
-        let validEventEndTime = dictionary["eventEndTime"] as? String,
-        let validEventDescription = dictionary["eventDescription"] as? String,
-        let validEventName = dictionary["eventName"] as? String
+            let dictionary = snapshot.value as? [String:Any],
+            let validUser = dictionary["userID"] as? String,
+            let validTimestamp = dictionary["timeStamp"] as? Double,
+            let validName = dictionary["userName"] as? String,
+            let validEventCategory = dictionary["eventCategory"] as? String,
+            let validEventDate = dictionary["eventDate"] as? String,
+            let validEventTime = dictionary["eventTime"] as? String,
+            let validEventEndTime = dictionary["eventEndTime"] as? String,
+            let validEventDescription = dictionary["eventDescription"] as? String,
+            let validEventName = dictionary["eventName"] as? String
             else { return nil }
         
-
+        
         name = validName
         userID = validUser
         timeStamp = Date(timeIntervalSince1970: validTimestamp)
@@ -72,7 +72,7 @@ class ChillData {
         if let validLong = dictionary["long"] as? Double {
             
             long = validLong
-
+            
         }
         
     }

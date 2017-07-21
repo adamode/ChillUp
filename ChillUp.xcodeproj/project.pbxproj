@@ -30,7 +30,6 @@
 		81FF958F1F1CAC4A00E0EE83 /* MeetupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF958E1F1CAC4A00E0EE83 /* MeetupCell.swift */; };
 		81FF95911F1CBD6400E0EE83 /* ChillData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF95901F1CBD6400E0EE83 /* ChillData.swift */; };
 		81FF95931F1DA7D000E0EE83 /* SelectedCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF95921F1DA7D000E0EE83 /* SelectedCellVC.swift */; };
-		81FF95951F1E15F500E0EE83 /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF95941F1E15F500E0EE83 /* EditVC.swift */; };
 		81FF95971F1E185100E0EE83 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF95961F1E185100E0EE83 /* ProfileCell.swift */; };
 		81FF95991F1E29B900E0EE83 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF95981F1E29B900E0EE83 /* UserProfile.swift */; };
 /* End PBXBuildFile section */
@@ -62,7 +61,6 @@
 		81FF958E1F1CAC4A00E0EE83 /* MeetupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupCell.swift; sourceTree = "<group>"; };
 		81FF95901F1CBD6400E0EE83 /* ChillData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChillData.swift; sourceTree = "<group>"; };
 		81FF95921F1DA7D000E0EE83 /* SelectedCellVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedCellVC.swift; sourceTree = "<group>"; };
-		81FF95941F1E15F500E0EE83 /* EditVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
 		81FF95961F1E185100E0EE83 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		81FF95981F1E29B900E0EE83 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		BD7B89CC367C8820D0A89688 /* Pods-ChillUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChillUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChillUp/Pods-ChillUp.release.xcconfig"; sourceTree = "<group>"; };
@@ -91,9 +89,6 @@
 		819049CC1F1F5C32002C1394 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				812F22211F207F4D00ADE18F /* TextFieldEffects.swift */,
-				812F221F1F207E6800ADE18F /* KaedeTextField.swift */,
-				812F22191F206F5B00ADE18F /* CircleView.swift */,
 				81FF958E1F1CAC4A00E0EE83 /* MeetupCell.swift */,
 				81FF95961F1E185100E0EE83 /* ProfileCell.swift */,
 				819049CA1F1F5C2C002C1394 /* SearchCell.swift */,
@@ -131,7 +126,6 @@
 				81FF95801F1C7AAC00E0EE83 /* View */,
 				81DB94521F1C73870021B825 /* Assets.xcassets */,
 				812F22231F2080E200ADE18F /* TextFieldEffects */,
-				81DB94541F1C73870021B825 /* LaunchScreen.storyboard */,
 				81FF957A1F1C766500E0EE83 /* GoogleService-Info.plist */,
 				81DB94571F1C73870021B825 /* Info.plist */,
 			);
@@ -143,6 +137,7 @@
 			children = (
 				81DB944F1F1C73870021B825 /* Main.storyboard */,
 				81FF957C1F1C7A5D00E0EE83 /* Auth.storyboard */,
+				81DB94541F1C73870021B825 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";
@@ -159,6 +154,9 @@
 		81FF95801F1C7AAC00E0EE83 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				812F22211F207F4D00ADE18F /* TextFieldEffects.swift */,
+				812F221F1F207E6800ADE18F /* KaedeTextField.swift */,
+				812F22191F206F5B00ADE18F /* CircleView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -170,7 +168,6 @@
 				81FF95821F1C7AF700E0EE83 /* LoginVC.swift */,
 				81FF95841F1C7B0400E0EE83 /* RegisterVC.swift */,
 				81FF95861F1C86AE00E0EE83 /* MainVC.swift */,
-				81FF95941F1E15F500E0EE83 /* EditVC.swift */,
 				81FF95881F1CA90700E0EE83 /* SearchVC.swift */,
 				81FF958C1F1CA96500E0EE83 /* ProfileVC.swift */,
 				81FF958A1F1CA91300E0EE83 /* CreateVC.swift */,
@@ -315,7 +312,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81FF95951F1E15F500E0EE83 /* EditVC.swift in Sources */,
 				81FF95851F1C7B0400E0EE83 /* RegisterVC.swift in Sources */,
 				81FF95891F1CA90700E0EE83 /* SearchVC.swift in Sources */,
 				812F22201F207E6800ADE18F /* KaedeTextField.swift in Sources */,

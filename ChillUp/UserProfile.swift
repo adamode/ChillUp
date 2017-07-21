@@ -43,7 +43,7 @@ class UserProfile {
         if let validFBid = dictionary["id"] as? String {
             
             fbID = validFBid
-
+            
         }
         
         if let validEventJoined = dictionary["eventJoined"] as? [String:Any] {

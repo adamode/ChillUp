@@ -16,6 +16,7 @@ class SelectedCellVC: UIViewController {
     var getCell: ChillData?
     
     @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var participantsCount: UILabel!
     @IBOutlet weak var eventImageView: UIImageView!
     @IBOutlet weak var getUsername: UILabel!
     @IBOutlet weak var getLocation: UILabel!
@@ -37,24 +38,27 @@ class SelectedCellVC: UIViewController {
         didSet {
             
             rsvpBtn.addTarget(self, action: #selector(rsvpBtnPressed(_:)), for: .touchUpInside)
+            rsvpBtn.layer.cornerRadius = 15
+            rsvpBtn.layer.borderWidth = 1
+            rsvpBtn.layer.borderColor = UIColor.black.cgColor
         }
     }
     
     var isJoining = false
     
     var currentUserID = Auth.auth().currentUser?.uid
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.getUsername.text = getCell?.name
+        self.getUsername.text = "Organizer: \(getCell?.name ?? "")"
         self.getLocation.text = getCell?.placemarkLocation
-        self.eventTitle.text = getCell?.eventName
+        self.eventTitle.text = "Event: \(getCell?.eventName ?? "")"
         self.descriptionLabel.text = getCell?.eventDescription
         self.timeLabel.text = getCell?.eventTime
         self.endTimeLabel.text = getCell?.eventEndTime
         self.dateLabel.text = getCell?.eventDate
-        self.categoryLabel.text = getCell?.eventCategory
+        self.categoryLabel.text = "Category: \(getCell?.eventCategory ?? "")"
         self.eventImageView.sd_setImage(with: getCell?.imageURL)
         
         let yourLocation = MKPointAnnotation()
@@ -67,7 +71,33 @@ class SelectedCellVC: UIViewController {
         mapView.setRegion(region, animated: true)
         
         btnStatus()
+        getParticipants()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.navigationController?.isNavigationBarHidden = false
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
+        
+    }
+    
+    func getParticipants() {
+        
+        let ref = Database.database().reference()
+        
+        ref.child("posts").child((getCell?.pid)!).child("participants").observe(.value, with: {snapshot in
+            
+            var count = 0
+            count += Int(snapshot.childrenCount)
+            self.participantsCount.text = "Participants: \(count)"
+            
+        })
     }
     
     func btnStatus() {
@@ -79,12 +109,10 @@ class SelectedCellVC: UIViewController {
             if snapshot.hasChild(self.currentUserID!) {
                 
                 self.rsvpBtn.setTitle("Joined", for: .normal)
-                self.rsvpBtn.backgroundColor = UIColor.red
                 
             } else {
                 
                 self.rsvpBtn.setTitle("Join", for: .normal)
-                self.rsvpBtn.backgroundColor = UIColor.blue
             }
         })
     }
