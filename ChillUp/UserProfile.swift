@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 
 class UserProfile {
+    
     var uid: String
     var id: String?
     var name: String?

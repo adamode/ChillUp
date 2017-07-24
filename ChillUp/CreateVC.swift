@@ -383,7 +383,6 @@ class CreateVC: UIViewController, UITextFieldDelegate {
                     
                     self.dismiss(animated: true, completion: nil)
                     self.submitBtn.isEnabled = true
-                    
                     self.chillUpName.text = nil
                     self.photoImageView.image = nil
                     self.chillUpDescription.text = nil
